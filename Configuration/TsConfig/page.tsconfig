@@ -1,0 +1,3 @@
+module.tx_w3c_treecacheflush {
+  settings.contextMenu.page.flushTreeCache = EXT:w3c_treecacheflush/Resources/Public/JavaScript/context-menu-flushtreecache.js
+}

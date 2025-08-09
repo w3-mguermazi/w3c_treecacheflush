@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  W3code\W3cTreecacheflush\ContextMenu\FlushTreeCacheItemProvider:
+    tags:
+      - name: backend.contextmenu.itemprovider
+        priority: 100
+        identifier: w3c_treecacheflush_flushTreeCache

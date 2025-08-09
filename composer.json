@@ -1,0 +1,27 @@
+{
+  "name": "w3code/w3c_treecacheflush",
+  "type": "typo3-cms-extension",
+  "description": "Flush page and subpages cache recursively from context menu.",
+  "license": "GPL-2.0-or-later",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Mehdi Guermazi",
+      "email": "mehdi@w3code.tn",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^13.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "W3code\\W3cTreecacheflush\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "w3c_treecacheflush"
+    }
+  }
+}
