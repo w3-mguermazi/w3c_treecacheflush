@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2025-08-10T00:00:00Z">
+    <body>
+      <trans-unit id="w3c_treecacheflush.cache_cleared_successfully">
+        <source>Cache cleared successfully</source>
+        <target>Cache cleared successfully</target>
+      </trans-unit>
+      <trans-unit id="w3c_treecacheflush.cache_clear_failed">
+        <source>Failed to clear cache</source>
+        <target>Failed to clear cache</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
