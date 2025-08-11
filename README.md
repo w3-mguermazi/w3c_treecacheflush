@@ -9,8 +9,7 @@ Extension TYPO3 permettant de vider le cache d'une page et de ses enfants de man
 ### Installation
 
 1. Installer l'extension via Composer ou la copier dans `typo3conf/ext/w3c_treecacheflush`.
-2. Activer l'extension dans le backend TYPO3 via le module d’extensions.
-3. Vider le cache système.
+2. Vider le cache système.
 
 ---
 
@@ -52,8 +51,7 @@ TYPO3 extension to flush the cache of a page and its child pages recursively via
 ### Installation
 
 1. Install the extension via Composer or copy it into `typo3conf/ext/w3c_treecacheflush`.
-2. Activate the extension in the TYPO3 backend via the extension manager.
-3. Clear the system cache.
+2. Clear the system cache.
 
 ---
 
