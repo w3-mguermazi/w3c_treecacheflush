@@ -7,6 +7,9 @@ use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Type\Bitmask\Permission;
 
 class FlushController
 {
@@ -32,8 +35,12 @@ class FlushController
 
         $uidsToFlush = $this->getRecursivePageUids($uid);
         $this->dataHandler->start([], []);
+        $permissionClause = $this->getBackendUserAuthentication()->getPagePermsClause(Permission::PAGE_SHOW);
         foreach ($uidsToFlush as $id) {
-            $this->dataHandler->clear_cacheCmd($id);
+            $pageRow = BackendUtility::readPageAccess($id, $permissionClause);
+            if ($id !== 0 && $this->getBackendUserAuthentication()->doesUserHaveAccess($pageRow, Permission::PAGE_SHOW)) {
+                $this->dataHandler->clear_cacheCmd($id);
+            }
             
         }
 
@@ -60,5 +67,10 @@ class FlushController
         }
 
         return $uids;
+    }
+
+    protected function getBackendUserAuthentication(): BackendUserAuthentication
+    {
+        return $GLOBALS['BE_USER'];
     }
 }

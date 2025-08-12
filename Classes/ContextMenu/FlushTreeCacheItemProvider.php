@@ -97,8 +97,18 @@ class FlushTreeCacheItemProvider extends AbstractProvider
      */
     protected function canFlushTreeCache(): bool
     {
-        //usually here you can find more sophisticated condition. See e.g. PageProvider::canBeEdited()
-        return true;
+        return !$this->isRoot()
+            && ($this->backendUser->isAdmin() || ($this->backendUser->getTSConfig()['options.']['clearCache.']['pages'] ?? false));
+    }
+
+    /**
+     * Returns true if current record is a root page
+     *
+     * @return bool
+     */
+    protected function isRoot()
+    {
+        return (int)$this->identifier === 0;
     }
 
 }
