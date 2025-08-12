@@ -2,6 +2,8 @@
 namespace W3code\W3cTreecacheflush\ContextMenu;
 
 use TYPO3\CMS\Backend\ContextMenu\ItemProviders\AbstractProvider;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 
 class FlushTreeCacheItemProvider extends AbstractProvider
 {
@@ -29,7 +31,8 @@ class FlushTreeCacheItemProvider extends AbstractProvider
     {
         return [
             'data-callback-module' => '@w3code/w3c_treecacheflush/context-menu-actions',
-            'data-uid' => $this->context
+            'data-label-success' =>  LocalizationUtility::translate('w3c_treecacheflush.cache_cleared_successfully', 'w3c_treecacheflush'),
+            'data-label-error' => LocalizationUtility::translate ('w3c_treecacheflush.cache_clear_failed', 'w3c_treecacheflush')
             // Here you can also add any other useful "data-" attribute you'd like to use in your JavaScript (e.g. localized messages)
         ];
     }

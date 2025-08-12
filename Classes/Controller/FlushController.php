@@ -6,10 +6,20 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 
 class FlushController
 {
+    /**
+     * @var DataHandler
+     */
+    protected $dataHandler;
+
+    public function __construct()
+    {
+        $this->dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+    }
+
     public function flushAction(ServerRequestInterface $request): ResponseInterface
     {
         //$uid = (int)($request->getAttribute('routeArguments')['uid'] ?? 0);
@@ -21,9 +31,10 @@ class FlushController
         }
 
         $uidsToFlush = $this->getRecursivePageUids($uid);
-        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+        $this->dataHandler->start([], []);
         foreach ($uidsToFlush as $id) {
-            $cacheManager->flushCachesByTag('pageId_' . $id);
+            $this->dataHandler->clear_cacheCmd($id);
+            
         }
 
         return new JsonResponse(['status' => 'ok']);
@@ -36,7 +47,11 @@ class FlushController
         $rows = $queryBuilder
             ->select('uid')
             ->from('pages')
-            ->where($queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($parentUid)))
+            ->where(
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($parentUid)),
+                $queryBuilder->expr()->eq('deleted', 0),
+                $queryBuilder->expr()->eq('hidden', 0)
+            )
             ->executeQuery()
             ->fetchAllAssociative();
 

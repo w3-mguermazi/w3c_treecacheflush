@@ -10,10 +10,10 @@ class FlushTreeCacheAction {
             new AjaxRequest(TYPO3.settings.ajaxUrls['w3c_treecacheflush_flush'] + '&uid=' + uid)
                 .get()
                 .then(() => {
-                    Notification.success(TYPO3.lang['w3c_treecacheflush.cache_cleared_successfully']);
+                    Notification.success(additionalData['labelSuccess']);
                 })
                 .catch(() => {
-                    Notification.error(TYPO3.lang['w3c_treecacheflush.cache_clear_failed']);
+                    Notification.error(additionalData['labelError']);
                 });
         }
     }
